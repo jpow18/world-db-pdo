@@ -1,8 +1,8 @@
-  <?php include_once("./index.php"); ?>
 
-  <form action=action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
+
+  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
     <h3><?php $country ?></h3>
-    <select>
+    <select name="category">
       <option>Explore</option>
       <option value="continent">Continent</option>
       <option value="surface">Surface Area</option>
@@ -12,4 +12,5 @@
       <option value="ln">Local Name</option>
       <option value="hos">Head of State</option>
     </select>
+    <button>Submit</button>
   </form>

@@ -13,3 +13,4 @@
         echo $error_message;
         exit('Unable to connect to the database');
     }
+?>

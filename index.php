@@ -1,10 +1,10 @@
 <?php 
-    $country = filter_input(INPUT_GET, "country", FILTER_SANITIZE_STRING);
+    $country = filter_input(INPUT_GET, "country", FILTER_SANITIZE_SPECIAL_CHARS);
 
     include_once "config/Database.php";
     if ($country) {
         $query = 'SELECT * FROM country WHERE Name LIKE :country ORDER BY Population DESC';
-
+        //var_dump($country);
         $statement = $db->prepare($query);
         $statement->bindValue(':country', "%" . $country . "%");
         $statement->execute();
@@ -13,9 +13,20 @@
         $statement->closeCursor();
         var_dump($results);
     }
-
     
-    
+    // Logic to get and display appropriate info based on dropdown menu choice
+    $category = filter_input(INPUT_GET, "category", FILTER_SANITIZE_SPECIAL_CHARS);
+    if ($category) {
+        $query = 'SELECT ? FROM country WHERE Name = ?';
+        var_dump($category);
+        var_dump($country);
+        $statement = $db->prepare($query);
+        $statement->execute([$category, $country]);
+        //var_dump($statement);
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $statement->closeCursor();
+        //var_dump($results);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
